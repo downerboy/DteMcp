@@ -1,0 +1,1 @@
+claude mcp add vs-debug -- "W:\source\repos\DteMcp\bin\Release\net48\DteMcp.exe"
