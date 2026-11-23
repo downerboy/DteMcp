@@ -12,6 +12,11 @@
   <ItemGroup>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="tests\**" />
   </ItemGroup>
 
 </Project>
