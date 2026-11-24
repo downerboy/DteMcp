@@ -76,7 +76,7 @@ namespace DteMcp.Tools
         private object Output(ToolArguments args)
         {
             dynamic dte = session.Dte;
-            List<object> panes = Com.Run(() => ((IEnumerable)dte.ToolWindows.OutputWindow.OutputWindowPanes).Cast<object>().ToList());
+            List<object> panes = Com.Run(() => ((IEnumerable)((dynamic)ToolWindows.OutputWindow(dte)).OutputWindowPanes).Cast<object>().ToList());
             List<string> names = panes.Select(PaneName).ToList();
 
             if (!args.Has("pane"))

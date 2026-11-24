@@ -129,11 +129,11 @@ namespace DteMcp.Tools
         private object ErrorList(string severity, int max)
         {
             dynamic dte = session.Dte;
-            dynamic items = Com.Run(() => dte.ToolWindows.ErrorList.ErrorItems);
-            int count = Math.Min(Com.Run(() => (int)items.Count), MaxErrorItemsScanned);
+            ToolWindows.IErrorItems items = Com.Run(() => ToolWindows.ErrorItems(dte));
+            int count = Math.Min(Com.Run(() => items.GetCount()), MaxErrorItemsScanned);
 
             List<Dictionary<string, object>> matching = Enumerable.Range(1, count)
-                .Select(index => DescribeError(Com.Run(() => (object)items.Item(index))))
+                .Select(index => DescribeError(Com.Run(() => (ToolWindows.IErrorItem)items.GetItem(index))))
                 .Where(error => severity == null || (string)error["severity"] == severity)
                 .Take(max)
                 .ToList();
@@ -141,17 +141,16 @@ namespace DteMcp.Tools
             return new Dictionary<string, object> { { "returned", matching.Count }, { "items", matching } };
         }
 
-        private static Dictionary<string, object> DescribeError(object item)
+        private static Dictionary<string, object> DescribeError(ToolWindows.IErrorItem item)
         {
-            dynamic typed = item;
             return new Dictionary<string, object>
             {
-                { "severity", SeverityName(Com.Try(() => (int?)typed.ErrorLevel) ?? 0) },
-                { "description", Com.Try(() => (string)typed.Description) },
-                { "file", Com.Try(() => (string)typed.FileName) },
-                { "line", Com.Try(() => (int?)typed.Line) },
-                { "column", Com.Try(() => (int?)typed.Column) },
-                { "project", Com.Try(() => (string)typed.Project) }
+                { "severity", SeverityName(Com.Try(() => (int?)item.GetErrorLevel()) ?? 0) },
+                { "description", Com.Try(() => item.GetDescription()) },
+                { "file", Com.Try(() => item.GetFileName()) },
+                { "line", Com.Try(() => (int?)item.GetLine()) },
+                { "column", Com.Try(() => (int?)item.GetColumn()) },
+                { "project", Com.Try(() => item.GetProject()) }
             };
         }
 
@@ -159,7 +158,7 @@ namespace DteMcp.Tools
         {
             switch (level)
             {
-                case 1:
+                case 4:
                     return "error";
                 case 2:
                     return "warning";
