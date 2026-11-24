@@ -23,7 +23,7 @@ Guidance for AI agents that **use** this server and for agents that **change** i
 - Layout: `Mcp/` (protocol, registry, schema), `Vs/` (COM session and helpers), `Tools/` (one provider class per area,
   each implementing `IToolProvider`), `Program.cs` (wiring only).
 - Add a tool: create a `ToolDefinition` in the matching provider with `ReadOnly(...)` or `Mutating(...)`. Mutating tools
-  are hidden automatically in read-only mode. Update [docs/TOOLS.md](docs/TOOLS.md) and the table in the README.
+  are hidden automatically in read-only mode. Update [docs/TOOLS.md](docs/TOOLS.md) and the tool list in the README.
 - Pure logic goes in code the test project can compile without COM (see the `Compile Include` lines in
   `tests/DteMcp.Tests/DteMcp.Tests.csproj`). Write the failing test first.
 - Every COM call goes through `Com.Run`, `Com.Do` or `Com.Try` so busy-Visual-Studio rejections are retried.
