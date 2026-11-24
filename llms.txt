@@ -6,7 +6,7 @@ Windows only. Needs Visual Studio 2026 (DTE 18.0) running at the same elevation 
 
 ## Docs
 
-- [README](README.md): requirements, install for Claude Code, Claude Desktop, Cursor and VS Code, safety, troubleshooting
+- [README](README.md): for agents only: preconditions, registering the exe, environment variables, tool list, safety, errors, build and test
 - [Tool reference](docs/TOOLS.md): every tool, its arguments and what it returns
 - [AGENTS.md](AGENTS.md): how to use the tools well, and how to change the server
 
