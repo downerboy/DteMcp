@@ -1,0 +1,18 @@
+# DteMcp
+
+> MCP server (stdio) that lets an AI agent inspect and control a running Visual Studio 2026 on Windows: debugger, editor, solution and projects, build and Error List, any VS command, and the EnvDTE object model. 32 tools. Apache-2.0.
+
+Windows only. Needs Visual Studio 2026 (DTE 18.0) running at the same elevation as the MCP client. Single exe, no installer, no network listener. Set DTEMCP_READONLY=1 to expose only read-only tools.
+
+## Docs
+
+- [README](README.md): requirements, install for Claude Code, Claude Desktop, Cursor and VS Code, safety, troubleshooting
+- [Tool reference](docs/TOOLS.md): every tool, its arguments and what it returns
+- [AGENTS.md](AGENTS.md): how to use the tools well, and how to change the server
+
+## Source
+
+- [Program.cs](Program.cs): wiring
+- [Mcp/](Mcp): JSON-RPC and MCP protocol, tool registry
+- [Vs/](Vs): COM Running Object Table session and helpers
+- [Tools/](Tools): tool providers (debugger, documents, solution, build, commands, object model)
