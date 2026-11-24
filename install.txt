@@ -1,2 +1,3 @@
-claude mcp add vs-debug -- "W:\source\repos\DteMcp\bin\Release\net48\DteMcp.exe"
-claude mcp add --scope user vs-debug -- "W:\source\repos\DteMcp\bin\Release\net48\DteMcp.exe"
+See README.md, section "Install". Quick form:
+
+claude mcp add vs -- "C:\full\path\to\DteMcp.exe"
